@@ -1,3 +1,4 @@
+// Contact.jsx
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import {
@@ -55,11 +56,6 @@ export default function Contact() {
     }
   }, [isAutoPlaying, slides.length]);
 
-  const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % slides.length);
-  const prevSlide = () =>
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
-  const toggleAutoPlay = () => setIsAutoPlaying(!isAutoPlaying);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -67,8 +63,9 @@ export default function Contact() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const number = "9779852030175";
     const whatsappMessage = `Hello Kings Motor! What kind of motors are you looking for? 🚗\n\nName: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone}\nMessage: ${formData.message}`;
-    const whatsappURL = `https://wa.me/9779864687572?text=${encodeURIComponent(
+    const whatsappURL = `https://wa.me/${number}?text=${encodeURIComponent(
       whatsappMessage
     )}`;
     window.open(whatsappURL, "_blank");
@@ -82,7 +79,7 @@ export default function Contact() {
       title: "Call Us",
       content: "+977 985-2030175",
       description: "Available 24/7 for your inquiries",
-      action: { text: "Call Now", href: "tel:+9779864687572", color: "blue" },
+      action: { text: "Call Now", href: "tel:+9779852030175", color: "blue" },
     },
     {
       icon: MessageCircle,
@@ -91,7 +88,7 @@ export default function Contact() {
       description: "Quick responses guaranteed",
       action: {
         text: "Chat Now",
-        href: "https://wa.me/9779864687572",
+        href: "https://wa.me/9779852030175",
         color: "green",
       },
     },
@@ -113,7 +110,7 @@ export default function Contact() {
 
   return (
     <div className="bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 min-h-screen">
-      {/* Enhanced Hero Carousel Section */}
+      {/* HERO SLIDER + OVERLAY */}
       <section className="relative w-full h-[40rem] overflow-hidden">
         <div className="absolute inset-0">
           {slides.map((slide, index) => (
@@ -130,12 +127,12 @@ export default function Contact() {
                 alt={`Contact - ${slide.subtitle}`}
                 className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/50 to-black/70"></div>
+              <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/50 to-black/70" />
             </div>
           ))}
         </div>
 
-        {/* Animated particles background */}
+        {/* Floating Particles */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           {[...Array(20)].map((_, i) => (
             <motion.div
@@ -164,14 +161,14 @@ export default function Contact() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, ease: "easeOut" }}
-            className="  rounded-3xl p-8 "
+            className="rounded-3xl p-8"
           >
             <motion.h1
               key={currentSlideData.subtitle}
               initial={{ opacity: 0, y: -30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              className="text-4xl md:text-6xl font-extrabold drop-shadow-lg tracking-tight mb-6 bg-gradient-to-r from-white via-blue-100 to-white bg-clip-text"
+              className="text-3xl md:text-6xl font-extrabold drop-shadow-lg tracking-tight mb-6 bg-gradient-to-r from-white via-blue-100 to-white bg-clip-text"
             >
               Connect With Kings Motor
             </motion.h1>
@@ -180,7 +177,7 @@ export default function Contact() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-              className="text-lg md:text-xl text-blue-100 max-w-2xl mx-auto mb-4"
+              className="text-lg md:text-xl text-blue-100 font-extralight max-w-2xl mx-auto mb-4"
             >
               {currentSlideData.subtitle}
             </motion.p>
@@ -188,7 +185,7 @@ export default function Contact() {
         </div>
       </section>
 
-      {/* Enhanced Contact Section */}
+      {/* CONTACT SECTION */}
       <section className="py-24 relative">
         <div className="container mx-auto px-6">
           <motion.div
@@ -198,16 +195,16 @@ export default function Contact() {
             viewport={{ once: true }}
             className="text-center mb-20"
           >
-            <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-slate-800 via-blue-700 to-indigo-700 bg-clip-text text-transparent mb-6">
+            <h2 className="text-3xl md:text-6xl font-extrabold bg-gradient-to-r from-slate-800 via-blue-700 to-indigo-700 bg-clip-text text-transparent mb-6">
               Get In Touch
             </h2>
-            <p className="text-slate-600 max-w-3xl mx-auto text-xl leading-relaxed">
+            <p className="text-slate-600 max-w-3xl mx-auto text-xl leading-relaxed font-extralight">
               Your journey to the perfect vehicle starts with a conversation.
               Our expert team is ready to assist you every step of the way.
             </p>
           </motion.div>
 
-          {/* Contact Info Cards */}
+          {/* CONTACT CARDS */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -275,7 +272,7 @@ export default function Contact() {
             })}
           </motion.div>
 
-          {/* Enhanced Contact Form */}
+          {/* CONTACT FORM */}
           <div className="w-full gap-12">
             <motion.div
               initial={{ opacity: 0, x: 50 }}
@@ -299,7 +296,8 @@ export default function Contact() {
                   </div>
                 </div>
 
-                <div className="space-y-6">
+                <form className="space-y-6" onSubmit={handleSubmit}>
+                  {/* name, phone, email, message */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <label
@@ -389,7 +387,7 @@ export default function Contact() {
                     By submitting this form, you agree to be contacted via
                     WhatsApp for automotive inquiries.
                   </p>
-                </div>
+                </form>
               </div>
             </motion.div>
           </div>

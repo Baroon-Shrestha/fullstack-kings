@@ -53,13 +53,12 @@ export default function WhyChooseKingsMotors() {
       <div className="container mx-auto px-6">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-5 py-2 rounded-full text-sm font-bold mb-4 shadow">
+          <div className="inline-flex items-center gap-2 bg-gradient-to-r from-[#C56029] to-[#F5B727] text-white px-5 py-2 rounded-full text-sm font-bold mb-4 shadow">
             <Target className="w-4 h-4" />
             WHY KINGS MOTOR STANDS OUT
           </div>
-          <h2 className="text-3xl md:text-5xl font-extrabold text-gray-800">
-            Excellence{" "}
-            <span className="block text-2xl md:text-3xl">In Every Detail</span>
+          <h2 className="text-3xl md:text-5xl bg-gradient-to-r from-[#C56029] to-[#F5B727] text-transparent bg-clip-text font-extrabold text-gray-800">
+            Excellence <span className="blck ">In Every Detail</span>
           </h2>
           <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
             Redefining luxury and performance. From world-class vehicles to

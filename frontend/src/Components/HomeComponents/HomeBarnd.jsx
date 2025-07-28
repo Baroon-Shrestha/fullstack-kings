@@ -1,186 +1,175 @@
-import React, { useState } from "react";
-import { Calendar, Gauge, Fuel, Award, CheckCircle } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import {
+  Calendar,
+  Gauge,
+  Fuel,
+  CheckCircle,
+  FuelIcon,
+  Car,
+  X,
+  Eye,
+  ArrowRight,
+} from "lucide-react";
+import api from "../../Utils/api";
+import { Link } from "react-router-dom";
 
 export default function KingsMotorsShowcase() {
+  const [cars, setCars] = useState([]);
   const [selectedCar, setSelectedCar] = useState(null);
-  const [showGrid, setShowGrid] = useState(true);
+  const [loading, setLoading] = useState(true);
 
-  const cars = [
-    {
-      name: "Ford Ranger Wildtrak",
-      tagline: "Built Ford Tough – Ready for Any Terrain",
-      modelYear: "2024",
-      kmsRan: "12,450 km",
-      fuelType: "Diesel",
-      mileage: "8.9 L/100km",
-      power: "210 hp",
-      price: "रु 1,09,00,000", // Approx in Nepal
-      certified: true,
-      image: "/ford-ranger-wildtrak-x.jpg",
-      description:
-        "The Ford Ranger Wildtrak blends rugged utility with advanced technology. Perfect for adventure and city life alike, with superior towing and a comfortable cabin.",
-    },
-    {
-      name: "Honda Civic",
-      tagline: "Sophisticated Style Meets Performance",
-      modelYear: "2023",
-      kmsRan: "18,200 km",
-      fuelType: "Petrol",
-      mileage: "12.75 km/L",
-      power: "158 hp",
-      price: "रु 89,00,000", // Approx in Nepal
-      certified: true,
-      image: "/2026_honda_civic_sedan_si_fq_oem_1_1600.avif",
-      description:
-        "The Honda Civic boasts a bold design and advanced safety features. A perfect choice for city driving and weekend getaways with great efficiency.",
-    },
-    {
-      name: "Škoda Octavia",
-      tagline: "Simply Clever – The Family Sedan",
-      modelYear: "2024",
-      kmsRan: "8,750 km",
-      fuelType: "Petrol",
-      mileage: "15-18 km/L",
-      power: "148 hp",
-      price: "रु 1,15,00,000", // Approx in Nepal
-      certified: true,
-      image: "/grey-scoda-octavia-left-right-260nw-2557014071.webp",
-      description:
-        "The Škoda Octavia offers spacious interiors and modern tech for a comfortable family drive. Known for its durability and fuel efficiency.",
-    },
-    {
-      name: "BMW i5",
-      tagline: "The Future of Driving – Electrified Luxury",
-      modelYear: "2023",
-      kmsRan: "15,600 km",
-      fuelType: "Electric",
-      mileage: "296 mi range (WLTP)",
-      power: "335 hp",
-      price: "रु 2,50,00,000", // Approx in Nepal
-      certified: true,
-      image: "/i5-exterior-right-front-three-quarter-5.avif",
-      description:
-        "The BMW i5 redefines electric luxury with cutting-edge technology and exhilarating performance. Perfect for those demanding innovation and style.",
-    },
-    {
-      name: "BYD Song Plus",
-      tagline: "Electrifying Every Journey",
-      modelYear: "2024",
-      kmsRan: "5,920 km",
-      fuelType: "Electric",
-      mileage: "505 km range (NEDC)",
-      power: "184 hp",
-      price: "रु 92,50,000", // Approx in Nepal
-      certified: true,
-      image: "/byd-song-l-back-precio.jpg",
-      description:
-        "The BYD Song Plus delivers an impressive range and premium features. A practical choice for urban commuters looking for sustainability.",
-    },
-    {
-      name: "Mitsubishi Outlander",
-      tagline: "Redefining SUV Luxury",
-      modelYear: "2023",
-      kmsRan: "22,100 km",
-      fuelType: "Plug-in Hybrid",
-      mileage: "74 MPGe (PHEV)",
-      power: "248 hp",
-      price: "रु 1,35,00,000", // Approx in Nepal
-      certified: true,
-      image: "/2025-mitsubishi-outlander-sel-104-6813d429cde8a.avif",
-      description:
-        "The Mitsubishi Outlander offers a perfect blend of hybrid efficiency and SUV luxury. Versatile for city drives and rugged trails.",
-    },
-  ];
+  // Mock data for demonstration - replace with your actual API call
+  useEffect(() => {
+    fetchLatestCars();
+  }, []);
+
+  const fetchLatestCars = async () => {
+    try {
+      const res = await api.get("/latestcars");
+      setCars(res.data.data || []);
+    } catch (err) {
+      console.error("Failed to fetch cars:", err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const getFuelTypeColor = (fuelType) => {
     switch (fuelType.toLowerCase()) {
       case "petrol":
-        return "bg-blue-100 text-blue-800";
+        return "bg-blue-50 text-blue-700 border-blue-200";
       case "diesel":
-        return "bg-yellow-100 text-yellow-800";
+        return "bg-amber-50 text-amber-700 border-amber-200";
       case "hybrid":
       case "plug-in hybrid":
-        return "bg-green-100 text-green-800";
+        return "bg-green-50 text-green-700 border-green-200";
       case "electric":
-        return "bg-emerald-100 text-emerald-800";
+        return "bg-emerald-50 text-emerald-700 border-emerald-200";
       default:
-        return "bg-gray-100 text-gray-800";
+        return "bg-gray-50 text-gray-700 border-gray-200";
     }
   };
 
-  const handleBack = () => {
+  const handleViewDetails = (car) => {
+    setSelectedCar(car);
+    document.body.style.overflow = "hidden";
+  };
+
+  const handleCloseModal = () => {
     setSelectedCar(null);
-    setTimeout(() => setShowGrid(true), 300);
+    document.body.style.overflow = "unset";
   };
 
   return (
-    <section className="min-h-screen bg-gradient-to-br from-white via-gray-50 to-slate-50 py-20 relative">
+    <section className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 py-16">
       {/* Header */}
       <div className="container mx-auto px-6 mb-16 text-center">
-        <div className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-5 py-2 rounded-full text-sm font-semibold shadow">
-          <Award className="w-4 h-4" />
-          KINGS MOTOR PREMIUM COLLECTION
+        <div className="inline-block px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-medium mb-6">
+          Premium Collection
         </div>
-        <h1 className="text-5xl md:text-6xl font-extrabold text-gray-900 mt-6">
+        <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
           Discover Excellence
         </h1>
-        <p className="text-lg text-gray-600 max-w-3xl mx-auto mt-4">
+        <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
           Explore our handpicked premium vehicles—certified for luxury and
           performance. Perfect for your next adventure in Nepal.
         </p>
       </div>
 
-      {/* Cars Grid */}
-      {showGrid && (
+      {/* Loading State */}
+      {loading ? (
+        <div className="flex items-center justify-center py-20">
+          <div className="animate-spin w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full"></div>
+          <span className="ml-3 text-gray-600">
+            Loading premium vehicles...
+          </span>
+        </div>
+      ) : (
+        /* Car Grid */
         <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
             {cars.map((car, index) => (
               <div
                 key={index}
-                className="group bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-blue-300 overflow-hidden relative hover:scale-105"
+                className="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-blue-200 overflow-hidden hover:-translate-y-1"
               >
-                {/* Certified Badge */}
-                {car.certified && (
-                  <div className="absolute top-4 left-4 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-md">
-                    <CheckCircle className="w-3 h-3 inline mr-1" />
-                    Certified
-                  </div>
-                )}
-                {/* Image */}
-                <img
-                  src={car.image}
-                  alt={car.name}
-                  className="w-full h-64 object-cover transform group-hover:scale-105 transition duration-500"
-                />
+                {/* Image Container */}
+                <div className="relative overflow-hidden">
+                  {car.certified && (
+                    <div className="absolute top-4 left-4 bg-green-500 text-white px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg z-10">
+                      <CheckCircle className="w-3 h-3 inline mr-1" />
+                      Certified
+                    </div>
+                  )}
+                  <img
+                    src={car.images[0].url}
+                    alt={`${car.name} ${car.model}`}
+                    className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </div>
+
                 {/* Content */}
-                <div className="p-6 space-y-3">
-                  <h3 className="text-2xl font-bold text-gray-900">
-                    {car.name}
-                  </h3>
-                  <p className="text-sm text-gray-500">{car.tagline}</p>
-                  <div className="flex justify-between items-center">
-                    <span
-                      className={`px-3 py-1 rounded-full text-xs font-medium ${getFuelTypeColor(
+                <div className="p-6">
+                  <div className="mb-4">
+                    <h3 className="text-xl font-bold text-gray-900 mb-1">
+                      {car.name} {car.model}
+                    </h3>
+                    <p className="text-sm text-gray-500">{car.tagline}</p>
+                  </div>
+
+                  {/* Price and Fuel Type */}
+                  <div className="flex justify-between items-center mb-4">
+                    <div
+                      className={`px-3 py-1 rounded-lg text-xs font-medium border ${getFuelTypeColor(
                         car.fuelType
                       )}`}
                     >
                       {car.fuelType}
-                    </span>
-                    <span className="font-bold text-xl text-gray-900">
-                      {car.price}
-                    </span>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-lg font-bold text-gray-900">
+                        NRs. {car.price}
+                      </div>
+                    </div>
                   </div>
-                  <p className="text-gray-600 text-sm leading-relaxed line-clamp-2">
-                    {car.description}
-                  </p>
+
+                  {/* Car Details */}
+                  <div className="grid grid-cols-3 gap-3 mb-6">
+                    <div className="text-center p-3 bg-gray-50 rounded-lg">
+                      <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                        <Gauge className="w-4 h-4 text-blue-600" />
+                      </div>
+                      <p className="text-xs text-gray-600 font-medium">
+                        {car.drivenKms?.toLocaleString()} km
+                      </p>
+                    </div>
+                    <div className="text-center p-3 bg-gray-50 rounded-lg">
+                      <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                        <Car className="w-4 h-4 text-purple-600" />
+                      </div>
+                      <p className="text-xs text-gray-600 font-medium">
+                        {car.transmission}
+                      </p>
+                    </div>
+                    <div className="text-center p-3 bg-gray-50 rounded-lg">
+                      <div className="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                        <Calendar className="w-4 h-4 text-orange-600" />
+                      </div>
+                      <p className="text-xs text-gray-600 font-medium">
+                        {car.modelYear}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* View Details Button */}
                   <button
-                    onClick={() => {
-                      setShowGrid(false);
-                      setSelectedCar(car);
-                    }}
-                    className="mt-4 w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 rounded-xl font-semibold text-sm hover:from-blue-700 hover:to-purple-700 transform hover:scale-105 transition duration-300 shadow-md hover:shadow-lg"
+                    onClick={() => handleViewDetails(car)}
+                    className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white py-3 px-4 rounded-xl font-semibold text-sm transition-all duration-300 flex items-center justify-center gap-2 group/btn shadow-lg hover:shadow-xl"
                   >
+                    <Eye className="w-4 h-4" />
                     View Details
+                    <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-200" />
                   </button>
                 </div>
               </div>
@@ -189,48 +178,100 @@ export default function KingsMotorsShowcase() {
         </div>
       )}
 
-      {/* Small Detail Card */}
+      {/* Enhanced Modal */}
       {selectedCar && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50 animate-fadeIn">
-          <div className="bg-white rounded-xl shadow-2xl w-11/12 max-w-sm p-4 relative">
-            <img
-              src={selectedCar.image}
-              alt={selectedCar.name}
-              className="w-full h-48 object-cover rounded-lg mb-3"
-            />
-            <h2 className="text-xl font-bold text-gray-800">
-              {selectedCar.name}
-            </h2>
-            <p className="text-gray-600 text-sm mb-2">
-              {selectedCar.description}
-            </p>
-            <div className="grid grid-cols-2 gap-3 text-sm text-gray-700 mb-2">
-              <div className="flex items-center gap-1">
-                <Calendar className="w-4 h-4 text-blue-500" />
-                Year: {selectedCar.modelYear}
-              </div>
-              <div className="flex items-center gap-1">
-                <Gauge className="w-4 h-4 text-purple-500" />
-                Power: {selectedCar.power}
-              </div>
-              <div className="flex items-center gap-1">
-                <Fuel className="w-4 h-4 text-green-500" />
-                Fuel: {selectedCar.fuelType}
-              </div>
-              <div>Mileage: {selectedCar.mileage}</div>
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-in fade-in duration-300">
+          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto animate-in zoom-in-95 duration-300">
+            {/* Modal Header */}
+            <div className="relative">
+              <img
+                src={selectedCar.images[0].url}
+                alt={`${selectedCar.name} ${selectedCar.model}`}
+                className="w-full h-64 md:h-80 object-cover rounded-t-2xl"
+              />
+              <button
+                onClick={handleCloseModal}
+                className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm hover:bg-white text-gray-700 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110"
+              >
+                <X className="w-5 h-5" />
+              </button>
+              {selectedCar.certified && (
+                <div className="absolute top-4 left-4 bg-green-500 text-white px-3 py-1.5 rounded-full text-sm font-semibold shadow-lg">
+                  <CheckCircle className="w-4 h-4 inline mr-1" />
+                  Certified
+                </div>
+              )}
             </div>
-            <div className="mt-2 text-lg font-bold text-blue-600">
-              {selectedCar.price}
+
+            {/* Modal Content */}
+            <div className="p-6">
+              <div className="mb-6">
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
+                  {selectedCar.name} {selectedCar.model}
+                </h2>
+                <p className="text-gray-600 mb-4">{selectedCar.tagline}</p>
+                <div className="text-2xl font-bold text-blue-600 mb-4">
+                  NRs. {selectedCar.price}
+                </div>
+              </div>
+
+              {/* Detailed Specs */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                <div className="bg-gray-50 p-4 rounded-xl text-center">
+                  <Calendar className="w-6 h-6 text-blue-500 mx-auto mb-2" />
+                  <p className="text-sm text-gray-600">Year</p>
+                  <p className="font-semibold text-gray-900">
+                    {selectedCar.modelYear}
+                  </p>
+                </div>
+                <div className="bg-gray-50 p-4 rounded-xl text-center">
+                  <Gauge className="w-6 h-6 text-purple-500 mx-auto mb-2" />
+                  <p className="text-sm text-gray-600">Engine</p>
+                  <p className="font-semibold text-gray-900">
+                    {selectedCar.engine}
+                  </p>
+                </div>
+                <div className="bg-gray-50 p-4 rounded-xl text-center">
+                  <Fuel className="w-6 h-6 text-green-500 mx-auto mb-2" />
+                  <p className="text-sm text-gray-600">Fuel</p>
+                  <p className="font-semibold text-gray-900">
+                    {selectedCar.fuelType}
+                  </p>
+                </div>
+                <div className="bg-gray-50 p-4 rounded-xl text-center">
+                  <Car className="w-6 h-6 text-orange-500 mx-auto mb-2" />
+                  <p className="text-sm text-gray-600">Driven</p>
+                  <p className="font-semibold text-gray-900">
+                    {selectedCar.drivenKms?.toLocaleString()} km
+                  </p>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex gap-3">
+                <button
+                  onClick={handleCloseModal}
+                  className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 py-3 px-4 rounded-xl font-semibold transition-colors duration-200"
+                >
+                  Close
+                </button>
+                <button className="flex-1 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white py-3 px-4 rounded-xl font-semibold transition-all duration-200 shadow-lg hover:shadow-xl">
+                  Contact Dealer
+                </button>
+              </div>
             </div>
-            <button
-              onClick={handleBack}
-              className="mt-4 w-full bg-gray-200 hover:bg-gray-300 text-gray-700 py-2 rounded-lg font-medium text-sm"
-            >
-              Back
-            </button>
           </div>
         </div>
       )}
+
+      {/* Discover More Button */}
+      <div className="flex items-center justify-center mt-16">
+        <Link to="/cars">
+          <button className="bg-white hover:bg-gray-50 text-gray-700 px-8 py-3 rounded-xl border border-gray-200 hover:border-gray-300 font-semibold transition-all duration-200 shadow-sm hover:shadow-md">
+            Discover More
+          </button>
+        </Link>
+      </div>
     </section>
   );
 }

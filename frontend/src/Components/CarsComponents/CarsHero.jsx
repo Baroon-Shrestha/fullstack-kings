@@ -9,9 +9,9 @@ export default function CarsHero() {
         className="w-full h-96 object-cover"
       />
       <div className="absolute bottom-0 w-full">
-        <div className="backdrop-blur-md bg-black/10 py-16 px-6 md:px-0">
+        <div className="backdrop-blur-md bg-black/40 py-8 px-6 md:px-0">
           <div className="container mx-auto">
-            <div className="text-4xl md:text-7xl font-extrabold text-white">
+            <div className="text-3xl md:text-6xl font-extrabold text-white">
               Premium Second Hand Cars
             </div>
             <div className="max-w-3xl text-base md:text-xl font-extralight text-white">

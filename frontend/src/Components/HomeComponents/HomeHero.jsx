@@ -24,9 +24,9 @@ export default function HomeHero() {
 
   const carBrands = [
     { name: "Honda", logo: "/Uploads/honda.png" },
-    { name: "BMW", logo: "/Uploads/bmw.png" },
-    { name: "Mercedes", logo: "/Uploads/mercedes.jpeg" },
-    { name: "Audi", logo: "/Uploads/audi.png" },
+    { name: " TATA", logo: "/Uploads/tata.avif" },
+    { name: "Nissan", logo: "/Uploads/Nissan.jpg" },
+    { name: "Jeep", logo: "/Uploads/Jeep.jpg" },
     { name: "Ford", logo: "/Uploads/ford.jpeg" },
     { name: "Hyundai", logo: "/Uploads/hyundai.jpeg" },
   ];
@@ -89,11 +89,11 @@ export default function HomeHero() {
 
         <div className="absolute inset-0 z-20 flex flex-col justify-center items-center text-center text-white px-6">
           <div className="max-w-4xl mx-auto">
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 text-white">
+            <h1 className="text-3xl md:text-7xl font-extrabold mb-6 text-white">
               Kings Motor Company Pvt. Ltd
             </h1>
 
-            <p className="text-lg md:text-xl mb-8 text-gray-200 max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl mb-8 font-extralight text-gray-200 max-w-2xl mx-auto">
               Your trusted partner for quality reconditioned vehicles
             </p>
 
@@ -110,11 +110,11 @@ export default function HomeHero() {
       <div className="bg-gradient-to-b from-gray-50 to-white py-20 overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-3xl md:text-6xl font-bold text-gray-900 mb-6">
               Premium Reconditioned Brands
             </h2>
             <div className="w-32 h-1 bg-gradient-to-r from-red-500 via-red-600 to-red-500 mx-auto rounded-full mb-6"></div>
-            <p className="text-gray-600 text-xl max-w-2xl mx-auto leading-relaxed">
+            <p className="text-gray-600 text-xl max-w-2xl mx-auto leading-relaxed font-extralight">
               Discover our extensive collection of expertly reconditioned
               premium automotive brands
             </p>

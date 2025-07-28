@@ -1,24 +1,12 @@
-import React, { useState } from "react";
-import {
-  Eye,
-  Lightbulb,
-  Leaf,
-  Crown,
-  Zap,
-  Globe,
-  Sparkles,
-  TrendingUp,
-  ArrowRight,
-  Star,
-  Shield,
-  Award,
-} from "lucide-react";
+import React from "react";
+import { Lightbulb, ArrowRight, Star } from "lucide-react";
 import VisionCards from "./VisionCards";
 import Stats from "./Stats";
+import { Link } from "react-router-dom";
 
 export default function KingsMotorsVision() {
   return (
-    <section className="relative py-32 bg-gradient-to-br from-slate-50 via-white to-slate-100 overflow-hidden">
+    <section className="relative py-0 bg-gradient-to-br from-slate-50 via-white to-slate-100 overflow-hidden">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-20 left-10 w-72 h-72 bg-blue-400/10 rounded-full blur-3xl animate-pulse"></div>
@@ -30,23 +18,25 @@ export default function KingsMotorsVision() {
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
-        <div className="text-center mb-20">
-          <h2 className="text-5xl md:text-7xl font-black text-gray-800 mb-6 tracking-tight leading-tight">
+        {/* Vision Heading */}
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-5xl font-extrabold mb-3 tracking-tight leading-snug bg-gradient-to-r from-[#C56029] to-[#F5B727] bg-clip-text text-transparent">
             OUR VISION
-            <span className="block text-3xl md:text-5xl mt-4 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent animate-pulse">
+            <span className="block mt-2 bg-gradient-to-r from-[#C56029] to-[#F5B727] bg-clip-text text-transparent">
               BEYOND TOMORROW
             </span>
           </h2>
 
-          <div className="flex justify-center mb-8">
-            <div className="w-40 h-1.5 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent transform -translate-x-full animate-pulse"></div>
+          <div className="flex justify-center mb-4">
+            <div className="w-32 h-1.5 bg-gradient-to-r from-[#C56029] to-[#F5B727] rounded-full relative overflow-hidden">
+              {/* <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent transform -translate-x-full animate-pulse"></div> */}
             </div>
           </div>
 
-          <p className="text-xl md:text-2xl text-gray-700 max-w-5xl mx-auto leading-relaxed font-light">
+          {/* Vision Paragraph */}
+          <p className="text-base md:text-lg text-gray-700 max-w-4xl mx-auto leading-relaxed font-light">
             At{" "}
-            <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500 relative">
+            <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#C56029] to-[#F5B727] relative">
               Kings Motor
               <Star className="w-4 h-4 text-amber-400 absolute -top-1 -right-5" />
             </span>
@@ -54,34 +44,32 @@ export default function KingsMotorsVision() {
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-green-500 font-semibold">
               technology meets sustainability
             </span>{" "}
-            and{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-orange-500 font-semibold">
-              luxury meets innovation
-            </span>
-            . Every drive is transformed into an unforgettable journey—
-            redefining automotive excellence worldwide.
+            and luxury meets innovation . Every drive is transformed into an
+            unforgettable journey— redefining automotive excellence worldwide.
           </p>
         </div>
 
-        {/* Enhanced Vision Statistics */}
+        {/* Cards and Stats */}
         <VisionCards />
         <Stats />
 
-        {/* Call to Action Section */}
-        <div className="text-center mt-24">
-          <div className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-lg border border-white/20 rounded-3xl p-12 max-w-4xl mx-auto">
-            <h3 className="text-3xl font-bold text-gray-800 mb-4">
+        {/* CTA Section */}
+        <div className="text-center mt-20">
+          <div className="bg-gradient-to-r from-orange-100/10 to-yellow-100/10 backdrop-blur-lg border border-white/20 rounded-3xl p-10 max-w-4xl mx-auto">
+            <h3 className="text-2xl font-bold mb-2 bg-gradient-to-r from-[#C56029] to-[#F5B727] bg-clip-text text-transparent">
               Ready to Experience the Future?
             </h3>
-            <p className="text-gray-600 mb-8 text-lg">
+            <p className="text-gray-600 mb-6 text-base">
               Join us on this revolutionary journey towards automotive
               excellence.
             </p>
-            <button className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-4 rounded-xl font-bold text-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 flex items-center gap-3 mx-auto">
-              <Lightbulb className="w-6 h-6" />
-              Discover More
-              <ArrowRight className="w-5 h-5" />
-            </button>
+            <Link to="/cars">
+              <button className="bg-gradient-to-r from-[#C56029] to-[#F5B727] text-white px-6 py-3 rounded-xl font-semibold text-base hover:shadow-xl transition-all duration-300 transform hover:scale-105 flex items-center gap-2 mx-auto">
+                <Lightbulb className="w-5 h-5" />
+                Discover More Options
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </Link>
           </div>
         </div>
       </div>

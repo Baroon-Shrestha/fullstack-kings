@@ -25,6 +25,7 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../Context/AuthContext";
 import axios from "axios";
 import toast from "react-hot-toast";
+import api from "../../Utils/api";
 
 export default function CarsCard({
   car,
@@ -127,7 +128,7 @@ export default function CarsCard({
     if (!confirmDelete) return;
 
     try {
-      const res = await axios.delete(`http://localhost:3000/api/delete/${id}`, {
+      const res = await api.delete(`/delete/${id}`, {
         withCredentials: true,
       });
       toast.success("Car deleted successfully!");
@@ -141,7 +142,7 @@ export default function CarsCard({
 
   const handleMarkSold = async (id) => {
     try {
-      await axios.patch(`http://localhost:3000/api/mark-sold/${id}`, {
+      await api.patch(`/mark-sold/${id}`, {
         withCredentials: true,
       });
       toast.success("Car marked as sold");
@@ -246,7 +247,7 @@ export default function CarsCard({
         {/* Header */}
         <div className="mb-4">
           <h3 className="text-xl font-bold text-gray-900 mb-1 line-clamp-1 capitalize">
-            {car.model} {car.name}
+            {car.name} {car.model}
           </h3>
           <div className="flex items-center justify-between">
             <p className="text-2xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
@@ -287,12 +288,13 @@ export default function CarsCard({
           {admin ? (
             <>
               {/* Admin Actions Row */}
-              <div className="flex gap-3">
-                <button className="flex-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:from-indigo-600 hover:via-purple-600 hover:to-pink-600 text-white py-3.5 px-4 rounded-2xl font-semibold transition-all duration-300 flex items-center justify-center gap-2.5 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 group">
-                  <Eye className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                  <span>View Details</span>
-                </button>
-
+              <div className="flex gap-3 items-center justify-center">
+                <Link to={`/car/${car._id}`}>
+                  <button className="flex-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:from-indigo-600 hover:via-purple-600 hover:to-pink-600 text-white py-3.5 px-4 rounded-2xl font-semibold transition-all duration-300 flex items-center justify-center gap-2.5 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 group">
+                    <Eye className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                    <span>View Details</span>
+                  </button>
+                </Link>
                 <div className="relative">
                   <button
                     onClick={() => setDropdownOpen(!dropdownOpen)}
@@ -326,14 +328,16 @@ export default function CarsCard({
                             Mark Sold
                           </span>
                         </button>
-                        <button className="w-full text-left px-4 py-3 hover:bg-blue-50 text-sm flex items-center gap-3 rounded-xl transition-all duration-200 group">
-                          <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center group-hover:bg-blue-200 transition-colors">
-                            <Pencil className="w-4 h-4 text-blue-600" />
-                          </div>
-                          <span className="font-medium text-gray-700">
-                            Edit Details
-                          </span>
-                        </button>
+                        <Link to={`/update-car/${car._id}`}>
+                          <button className="w-full text-left px-4 py-3 hover:bg-blue-50 text-sm flex items-center gap-3 rounded-xl transition-all duration-200 group">
+                            <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center group-hover:bg-blue-200 transition-colors">
+                              <Pencil className="w-4 h-4 text-blue-600" />
+                            </div>
+                            <span className="font-medium text-gray-700">
+                              Edit Details
+                            </span>
+                          </button>
+                        </Link>
                       </div>
                     </div>
                   )}

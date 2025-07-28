@@ -3,6 +3,7 @@ import { X, Plus, Upload, Car, ChevronDown, Image } from "lucide-react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import api from "../../Utils/api";
 
 export default function AddCarForm() {
   const [formData, setFormData] = useState({
@@ -30,24 +31,15 @@ export default function AddCarForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const bodyTypeOptions = [
-    "Sedan",
     "SUV",
+    "Sedan",
+    "Offroad",
     "Hatchback",
     "Coupe",
     "Convertible",
-    "Wagon",
-    "Pickup Truck",
-    "Minivan",
-    "Crossover",
+    "Truck",
   ];
-  const conditionOptions = [
-    "Excellent",
-    "Very Good",
-    "Good",
-    "Fair",
-    "Poor",
-    "Salvage",
-  ];
+  const conditionOptions = ["Excellent", "Like New", "Good", "Fair", "Poor"];
   const fuelTypeOptions = ["Petrol", "Diesel", "Electric", "Hybrid"];
   const transmissionOptions = ["Automatic", "Manual"];
 
@@ -108,8 +100,9 @@ export default function AddCarForm() {
       data.append("features", JSON.stringify(features));
       images.forEach((img) => data.append("images", img));
 
-      const res = await axios.post("http://localhost:3000/api/add-cars", data, {
+      const res = await api.post("/add-cars", data, {
         headers: { "Content-Type": "multipart/form-data" },
+        withCredentials: true,
       });
 
       // For demo purposes
@@ -247,7 +240,7 @@ export default function AddCarForm() {
   const firstGridFields = [
     {
       name: "name",
-      label: "Car Name",
+      label: "Brand",
       type: "text",
       placeholder: "e.g., Toyota",
     },

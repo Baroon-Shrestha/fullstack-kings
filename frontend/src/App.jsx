@@ -13,6 +13,9 @@ import AddCarForm from "./Components/CarsComponents/AddCarForm";
 import Toaster from "react-hot-toast";
 import LoginForm from "./Components/Admin/Login";
 import Logout from "./Components/Admin/Logout";
+import EditForm from "./Components/CarsComponents/EditForm";
+import Unauthorized from "./Components/Routes/Unauthorized";
+import ProtectedAdminRoute from "./Components/Routes/ProtectedAdminRoute";
 
 function App() {
   const location = useLocation();
@@ -28,12 +31,28 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/unauthorized" element={<Unauthorized />} />
         <Route path="/about" element={<About />} />
         <Route path="/cars" element={<Cars />} />
         <Route path="/car/:id" element={<CarDetails />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/add-car" element={<AddCarForm />} />
+        <Route
+          path="/add-car"
+          element={
+            <ProtectedAdminRoute>
+              <AddCarForm />
+            </ProtectedAdminRoute>
+          }
+        />
         <Route path="/admin" element={<LoginForm />} />
+        <Route
+          path="/update-car/:id"
+          element={
+            <ProtectedAdminRoute>
+              <EditForm />
+            </ProtectedAdminRoute>
+          }
+        />
         <Route path="/logout" element={<Logout />} />
         <Route path="*" element={<Notfound />} />
       </Routes>

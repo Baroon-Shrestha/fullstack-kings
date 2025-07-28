@@ -33,12 +33,12 @@ export default function HomeWhy() {
             {/* Main Heading */}
             <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight">
               Why{" "}
-              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              <span className="bg-[#FE9C30] bg-clip-text text-transparent">
                 King Motor
               </span>
               ?
             </h2>
-            <div className="w-20 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mb-4"></div>
+            <div className="w-20 h-1 bg-gradient-to-r from-[#C56029] to-[#F5B727] rounded-full mb-4"></div>
 
             {/* Description */}
             <p className="text-gray-600 leading-relaxed text-lg">
@@ -72,7 +72,7 @@ export default function HomeWhy() {
 
             {/* CTA Button */}
             <div className="pt-6">
-              <button className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg shadow hover:shadow-lg transform hover:scale-105 transition duration-300">
+              <button className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-[#C56029] to-[#F5B727] text-white font-semibold rounded-lg shadow hover:shadow-lg transform hover:scale-105 transition duration-300">
                 Explore Our Collection
                 <svg
                   className="ml-2 w-5 h-5"

@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
 import CarsCard from "../SharedComponents/CarsCard";
-import axios from "axios";
-
 import { useNavigate } from "react-router-dom";
 import { Plus } from "lucide-react";
 import { useAuth } from "../Context/AuthContext";
+import api from "../../Utils/api";
 
 export default function CarsGrid() {
-  const { user } = useAuth(); // ✅ Get user from context
+  const { user } = useAuth();
   const navigate = useNavigate();
   const [cars, setCars] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const carsPerPage = 6;
 
   const admin = user?.role;
 
@@ -20,7 +21,7 @@ export default function CarsGrid() {
 
   const fetchCars = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/api/all-cars");
+      const res = await api.get("/all-cars");
       setCars(res.data.data || []);
     } catch (error) {
       console.error("Error fetching cars:", error.message);
@@ -47,14 +48,22 @@ export default function CarsGrid() {
     setCars((prev) => prev.filter((car) => car._id !== id));
   };
 
+  const sortedCars = [...cars].sort((a, b) => (a.sold ? 1 : -1));
+
+  // Pagination logic
+  const indexOfLastCar = currentPage * carsPerPage;
+  const indexOfFirstCar = indexOfLastCar - carsPerPage;
+  const currentCars = sortedCars.slice(indexOfFirstCar, indexOfLastCar);
+  const totalPages = Math.ceil(sortedCars.length / carsPerPage);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const nextPage = () =>
+    setCurrentPage((prev) => Math.min(prev + 1, totalPages));
+  const prevPage = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
+
   if (loading) return <div className="text-center text-lg">Loading...</div>;
   if (cars.length === 0)
     return <div className="text-center text-lg">No cars available.</div>;
-
-  const sortedCars = [...cars].sort((a, b) => {
-    if (a.sold === b.sold) return 0;
-    return a.sold ? 1 : -1; // move sold cars to the end
-  });
 
   return (
     <div className="min-h-screen bg-gray-50 py-20 p-8">
@@ -64,9 +73,7 @@ export default function CarsGrid() {
             Premium Second Hand Cars
           </div>
           <div className="max-w-3xl text-base md:text-xl font-extralight text-center">
-            Experience the comfort and quality of high-end vehicles without the
-            new car price tag. Our certified pre-owned cars are built to
-            impress.
+            Experience comfort and quality without the new car price tag.
           </div>
         </div>
 
@@ -83,15 +90,48 @@ export default function CarsGrid() {
         )}
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {sortedCars.map((car) => (
+          {currentCars.map((car) => (
             <CarsCard
               key={car._id}
               car={car}
               onOrderClick={handleOrderClick}
-              onCarDeleted={handleCarDeleted} // ✅ added
+              onCarDeleted={handleCarDeleted}
               onCarSold={handleCarSold}
             />
           ))}
+        </div>
+
+        {/* Pagination Controls */}
+        <div className="flex justify-center mt-10 gap-2 flex-wrap">
+          <button
+            onClick={prevPage}
+            disabled={currentPage === 1}
+            className="px-4 py-2 bg-slate-200 rounded-md disabled:opacity-50"
+          >
+            Previous
+          </button>
+
+          {[...Array(totalPages)].map((_, index) => (
+            <button
+              key={index}
+              onClick={() => paginate(index + 1)}
+              className={`px-4 py-2 rounded-md ${
+                currentPage === index + 1
+                  ? "bg-blue-600 text-white"
+                  : "bg-slate-200"
+              }`}
+            >
+              {index + 1}
+            </button>
+          ))}
+
+          <button
+            onClick={nextPage}
+            disabled={currentPage === totalPages}
+            className="px-4 py-2 bg-slate-200 rounded-md disabled:opacity-50"
+          >
+            Next
+          </button>
         </div>
       </div>
     </div>

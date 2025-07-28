@@ -39,10 +39,10 @@ export default function TestimonialsPage() {
       <div className="max-w-6xl mx-auto">
         {/* Header Section */}
         <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-extrabold mb-4 bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
+          <h1 className="text-3xl md:text-6xl font-extrabold mb-4 bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
             What Our Clients Say
           </h1>
-          <p className="text-gray-600 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+          <p className="text-gray-600 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed font-extralight">
             Real feedback from real customers who've experienced our exceptional
             service.
           </p>

@@ -1,8 +1,8 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
+import api from "../../Utils/api";
 
 const AuthContext = createContext();
-const BASE_URL = "http://localhost:3000/api";
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await axios.get(`${BASE_URL}/me`, {
+        const res = await api.get(`/me`, {
           withCredentials: true,
         });
         setUser(res.data);
@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = async (credentials) => {
-    const res = await axios.post(`${BASE_URL}/login`, credentials, {
+    const res = await api.post(`/login`, credentials, {
       withCredentials: true,
     });
     setUser({ username: res.data.username, role: res.data.role });
@@ -33,11 +33,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     try {
-      await axios.post(
-        "http://localhost:3000/api/logout",
-        {},
-        { withCredentials: true }
-      );
+      await api.post("/logout", {}, { withCredentials: true });
     } catch (error) {
       console.error("Logout error:", error);
     } finally {

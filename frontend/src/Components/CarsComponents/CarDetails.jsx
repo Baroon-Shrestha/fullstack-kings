@@ -24,6 +24,7 @@ import {
 } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import api from "../../Utils/api";
 
 export default function CarDetails() {
   const { id } = useParams();
@@ -38,7 +39,7 @@ export default function CarDetails() {
   useEffect(() => {
     const fetchCarDetails = async () => {
       try {
-        const res = await axios.get(`http://localhost:3000/api/car/${id}`);
+        const res = await api.get(`/car/${id}`);
         setCarDesc(res.data.data);
       } catch (err) {
         console.error("Failed to fetch car details", err);
@@ -288,10 +289,6 @@ export default function CarDetails() {
                   <h1 className="text-3xl font-bold text-gray-900 capitalize leading-tight">
                     {carDesc.model} {carDesc.name}
                   </h1>
-                  <div className="flex items-center gap-2 mt-2">
-                    <MapPin className="w-4 h-4 text-gray-500" />
-                    <span className="text-gray-600">{carDesc.location}</span>
-                  </div>
                 </div>
                 <div className="text-right">
                   <p className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent">
@@ -439,7 +436,7 @@ export default function CarDetails() {
                   <div className="flex items-center gap-1 mt-2">
                     <MapPin className="w-4 h-4 text-gray-500" />
                     <span className="text-gray-600 text-sm">
-                      Located in {carDesc.location}
+                      Biratnagar-4, Pipal Chowk (Near Bajeko Sekuwa)
                     </span>
                   </div>
                 </div>
