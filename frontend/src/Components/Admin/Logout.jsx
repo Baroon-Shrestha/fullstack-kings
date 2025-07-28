@@ -1,0 +1,19 @@
+// src/Pages/Logout.jsx
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../Context/AuthContext";
+
+export default function Logout() {
+  const { logout } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const performLogout = async () => {
+      await logout();
+      navigate("/");
+    };
+    performLogout();
+  }, []);
+
+  return null;
+}
