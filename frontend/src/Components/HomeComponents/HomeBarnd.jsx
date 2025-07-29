@@ -165,7 +165,7 @@ export default function KingsMotorsShowcase() {
                   {/* View Details Button */}
                   <button
                     onClick={() => handleViewDetails(car)}
-                    className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white py-3 px-4 rounded-xl font-semibold text-sm transition-all duration-300 flex items-center justify-center gap-2 group/btn shadow-lg hover:shadow-xl"
+                    className="w-full bg-gradient-to-r from-[#C56029] to-[#F5B727]  text-white py-3 px-4 rounded-xl font-semibold text-sm transition-all duration-300 flex items-center justify-center gap-2 group/btn shadow-lg hover:shadow-xl"
                   >
                     <Eye className="w-4 h-4" />
                     View Details

@@ -25,7 +25,7 @@ export default function HomeHero() {
   const carBrands = [
     { name: "Honda", logo: "/Uploads/honda.png" },
     { name: " TATA", logo: "/Uploads/tata.avif" },
-    { name: "Nissan", logo: "/Uploads/Nissan.jpg" },
+    { name: "Nissan", logo: "/Upload/nissan.png" },
     { name: "Jeep", logo: "/Uploads/Jeep.jpg" },
     { name: "Ford", logo: "/Uploads/ford.jpeg" },
     { name: "Hyundai", logo: "/Uploads/hyundai.jpeg" },
@@ -130,7 +130,6 @@ export default function HomeHero() {
                   className="flex-shrink-0 mx-8 group cursor-pointer"
                 >
                   <div className="w-40 h-40 bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 hover:scale-105 flex items-center justify-center border border-gray-200 group-hover:border-red-300 relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-br from-red-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <div className="text-center relative z-10">
                       <img
                         src={brand.logo}
@@ -152,7 +151,6 @@ export default function HomeHero() {
                   className="flex-shrink-0 mx-8 group cursor-pointer"
                 >
                   <div className="w-40 h-40 bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 hover:scale-105 flex items-center justify-center border border-gray-200 group-hover:border-red-300 relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-br from-red-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <div className="text-center relative z-10">
                       <img
                         src={brand.logo}
@@ -172,38 +170,50 @@ export default function HomeHero() {
       </div>
 
       <style>{`
-        .text-shadow-xl {
-          text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.7), 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
+  .text-shadow-xl {
+    text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.7), 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
 
-        @keyframes scroll {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(-50%);
-          }
-        }
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
 
-        .animate-scroll {
-          animation: scroll 35s linear infinite;
-        }
+  .animate-scroll {
+    animation: scroll 20s linear infinite;
+  }
 
-        .animate-scroll:hover {
-          animation-play-state: paused;
-        }
+  @media (max-width: 768px) {
+    .animate-scroll {
+      animation-duration: 25s;
+    }
+  }
 
-        @keyframes pulse {
-          0%, 100% {
-            opacity: 0.3;
-            transform: scale(1);
-          }
-          50% {
-            opacity: 0.8;
-            transform: scale(1.05);
-          }
-        }
-      `}</style>
+  @media (max-width: 480px) {
+    .animate-scroll {
+      animation-duration: 18s;
+    }
+  }
+
+  .animate-scroll:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 0.3;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.8;
+      transform: scale(1.05);
+    }
+  }
+`}</style>
     </>
   );
 }

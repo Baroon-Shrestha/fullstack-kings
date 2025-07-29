@@ -34,9 +34,8 @@ export default function HomeWhy() {
             <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight">
               Why{" "}
               <span className="bg-[#FE9C30] bg-clip-text text-transparent">
-                King Motor
+                King Motor?
               </span>
-              ?
             </h2>
             <div className="w-20 h-1 bg-gradient-to-r from-[#C56029] to-[#F5B727] rounded-full mb-4"></div>
 

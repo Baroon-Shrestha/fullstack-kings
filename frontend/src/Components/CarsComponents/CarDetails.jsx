@@ -141,19 +141,6 @@ export default function CarDetails() {
             </button>
 
             <div className="flex items-center gap-3">
-              <button
-                onClick={() => setIsLiked(!isLiked)}
-                className={`p-2 rounded-full transition-all duration-200 ${
-                  isLiked
-                    ? "bg-red-100 text-red-600"
-                    : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-                }`}
-              >
-                <Heart className={`w-5 h-5 ${isLiked ? "fill-current" : ""}`} />
-              </button>
-              <button className="p-2 rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 transition-all duration-200">
-                <Share2 className="w-5 h-5" />
-              </button>
               <button className="px-6 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
                 Place Order
               </button>

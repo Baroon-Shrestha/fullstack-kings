@@ -359,10 +359,8 @@ export default function CarsCard({
                 <button
                   disabled={car.sold}
                   onClick={() => onOrderClick?.(car)}
-                  className={`w-full bg-gradient-to-r from-emerald-500 to-cyan-500 text-white py-4 px-4 rounded-2xl font-semibold transition-all duration-300 flex items-center justify-center gap-2.5 shadow-lg transform hover:-translate-y-0.5 group relative overflow-hidden ${
-                    car.sold
-                      ? "opacity-50 cursor-not-allowed"
-                      : "hover:shadow-xl hover:from-emerald-600 hover:to-cyan-600"
+                  className={`w-full bg-gradient-to-r from-[#C56029] to-[#F5B727] text-white py-4 px-4 rounded-2xl font-semibold transition-all duration-300 flex items-center justify-center gap-2.5 shadow-lg transform hover:-translate-y-0.5 group relative overflow-hidden ${
+                    car.sold ? "opacity-50 cursor-not-allowed" : ""
                   }`}
                 >
                   <Zap className="w-4 h-4" />

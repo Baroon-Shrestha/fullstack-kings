@@ -31,7 +31,7 @@ export default function CarsGrid() {
   };
 
   const handleOrderClick = (car) => {
-    alert(`Order placed for ${car.name} ${car.model}!`);
+    alert("Contact Us or leave your details from the Contact section.");
   };
 
   const handleCarSold = (id) => {

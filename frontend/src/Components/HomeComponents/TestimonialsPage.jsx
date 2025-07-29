@@ -6,26 +6,50 @@ import Carousel from "../HelperComopnents/Carosuel";
 const testimonials = [
   {
     clientName: "Sujan Maharjan",
-    designation: "CEO, CloudWave Tech",
+    designation: "Civil Engineer",
     review:
-      "The Creta I received from Kings Motors was in immaculate condition. Their service exceeded my expectations and the delivery was hassle-free.",
+      "I recently purchased a reconditioned Creta from Kings Motors and I’m honestly impressed. The car looked and felt brand new, and the entire process was smooth and transparent.",
     productImage: "Upload/test1.jpeg",
     rating: 5,
   },
   {
     clientName: "Anisha Shrestha",
-    designation: "Marketing Manager, Urban Youth",
+    designation: "Interior Designer",
     review:
-      "I was amazed by the condition and pricing. The Aqua I purchased was exactly as promised. Highly recommended!",
+      "Kings Motors exceeded my expectations. I got a well-maintained Aqua with clean documents and no hidden charges. The staff was very supportive throughout the purchase.",
     productImage: "Upload/test2.jpeg",
     rating: 5,
   },
   {
     clientName: "Rabin Basnet",
-    designation: "Freelancer",
+    designation: "Freelance Photographer",
     review:
-      "Reliable, fast, and clean paperwork. Definitely going back for my next upgrade.",
+      "Couldn’t be happier with my decision. My secondhand car runs perfectly and looks great. Kings Motors truly knows how to deliver quality and trust.",
     productImage: "Upload/test3.jpeg",
+    rating: 5,
+  },
+  {
+    clientName: "Shristi Bhandari",
+    designation: "Banking Professional",
+    review:
+      "Buying my first car felt intimidating, but Kings Motors made it stress-free. They patiently answered all my questions and helped me find a budget-friendly, reliable vehicle.",
+    productImage: "Upload/test4.jpeg",
+    rating: 5,
+  },
+  {
+    clientName: "Pratik Shakya",
+    designation: "Software Developer",
+    review:
+      "The detailing and condition of the car were top-notch. Kings Motors provided genuine service and timely updates. Highly satisfied with the overall experience!",
+    productImage: "Upload/test5.jpeg",
+    rating: 5,
+  },
+  {
+    clientName: "Ritika Joshi",
+    designation: "Small Business Owner",
+    review:
+      "I was looking for a family car and found the perfect fit here. Clean interiors, great mileage, and friendly staff. I’d definitely recommend Kings Motors to anyone buying secondhand cars.",
+    productImage: "Upload/test6.jpeg",
     rating: 5,
   },
 ];
